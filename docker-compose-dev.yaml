@@ -1,0 +1,26 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:13-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app
+    volumes:
+      - simple-data:/var/lib/postgresql/data
+
+  amqp:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=app
+      - RABBITMQ_DEFAULT_PASS=app
+      - RABBITMQ_DEFAULT_VHOST=vhost
+
+volumes:
+  simple-data:

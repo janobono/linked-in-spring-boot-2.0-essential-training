@@ -1,0 +1,17 @@
+# ===============================
+# = LOGGING
+# ===============================
+logging:
+  level:
+    sk.janobono: ${LOG_LEVEL:debug}
+
+spring:
+  # ===============================
+  # = RABBIT MQ
+  # ===============================
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USER:app}
+    password: ${RABBIT_PASSWORD:app}
+    virtual-host: vhost

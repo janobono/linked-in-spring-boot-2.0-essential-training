@@ -1,0 +1,60 @@
+# ===============================
+# = SERVER
+# ===============================
+server:
+  port: ${PORT:8080}
+
+# ===============================
+# = LOGGING
+# ===============================
+logging:
+  level:
+    sk.janobono: ${LOG_LEVEL:debug}
+
+# ===============================
+# = ACTUATOR
+# ===============================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      roles: USER
+      show-details: when_authorized
+
+spring:
+  data:
+    rest:
+      base-path: api/rest
+  # ===============================
+  # = JPA / HIBERNATE
+  # ===============================
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/app}
+    username: ${DB_USER:app}
+    password: ${DB_PASS:app}
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        enable_lazy_load_no_trans: true
+        event:
+          merge:
+            entity_copy_observer: allow
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    open-in-view: false
+
+  # ===============================
+  # = RABBIT MQ
+  # ===============================
+  rabbitmq:
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USER:app}
+    password: ${RABBIT_PASSWORD:app}
+    virtual-host: vhost
